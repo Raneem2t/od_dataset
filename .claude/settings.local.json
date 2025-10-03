@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/Library/Frameworks/Python.framework/Versions/3.13/bin/python3 -m pip install:*)",
+      "Bash(export OPENAI_API_KEY=:*)",
+      "Bash(/Library/Frameworks/Python.framework/Versions/3.13/bin/python3:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(git remote remove:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

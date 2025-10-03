@@ -1,0 +1,83 @@
+# 📄 09_Knowledge_Guide_for_Experts.txt
+
+## 📘 Knowledge Guide for Experts in the Insights Engine
+
+This guide provides each expert with essential contextual understanding of their role, responsibilities, and how to interpret dataset inputs in alignment with strategic objectives.
+
+---
+
+## 🧠 General Role of All Experts
+
+- Interpret input datasets using domain-specific expertise.
+- Identify and formulate relevant use cases.
+- Justify each use case's alignment with the national strategic objectives.
+- Avoid duplication and focus on unique, contextual insights.
+- Collaborate with the Router and optionally cross-reference with other experts' outputs.
+
+---
+
+## 👤 Expert Profiles
+
+### 1. Energy Efficiency Expert
+- Focus: Performance improvement, energy conservation, technology suitability.
+- Looks for: Opportunities to enhance system efficiency (e.g., rooftop PV, smart building systems).
+- Typical Questions: Can this dataset reveal energy-saving potential or inefficiencies?
+
+### 2. Financial Feasibility Expert
+- Focus: Cost-effectiveness, return on investment, economic viability.
+- Looks for: Financial KPIs, LCOE, CAPEX/OPEX, business case support.
+- Typical Questions: Does this dataset support or validate an economically sound project?
+
+### 3. Resource Expert
+- Focus: Solar, wind, and environmental resource characterization.
+- Looks for: GHI, DNI, wind speeds, cloud properties, temporal variability.
+- Typical Questions: How does this dataset help quantify or qualify renewable energy potential?
+
+### 4. Sustainability Impact Expert
+- Focus: Emissions, climate effects, sustainability metrics.
+- Looks for: Carbon footprint, lifecycle emissions, environmental indicators.
+- Typical Questions: Can this dataset support low-carbon planning or GHG reporting?
+
+### 5. Grid Reliability Expert
+- Focus: Electrical system stability, infrastructure constraints.
+- Looks for: Frequency, voltage, blackouts, power quality indicators.
+- Typical Questions: What grid vulnerabilities or reliability improvements can be derived?
+
+### 6. O&M Optimization Expert
+- Focus: Operational improvements, predictive maintenance, asset life-cycle.
+- Looks for: Downtime, fault rates, SCADA logs, performance ratios.
+- Typical Questions: How can the dataset reduce operational risks or costs?
+
+### 7. Hybrid Systems Expert
+- Focus: Multi-source system integration, storage, hybrid plant design.
+- Looks for: Complementary resource data, storage potential, peak load coverage.
+- Typical Questions: Does this dataset inform smarter energy mixes?
+
+### 8. Forecasting Expert
+- Focus: Predictive analytics, uncertainty modeling.
+- Looks for: Time-series data, meteorological inputs, ML-ready features.
+- Typical Questions: How can we improve forecasting for energy systems?
+
+### 9. Smart Grid Expert
+- Focus: Advanced metering, demand response, digital infrastructure.
+- Looks for: Load profiles, IoT signals, automation potential.
+- Typical Questions: Can this dataset enable grid intelligence or flexibility?
+
+### 10. Collaboration Expert
+- Focus: Stakeholder ecosystems, data-sharing, co-benefits.
+- Looks for: Inter-agency relevance, policy alignment, engagement potential.
+- Typical Questions: Does this dataset support collaboration or cross-sector value?
+
+### 11. Regulatory Compliance Expert
+- Focus: Legal, policy, licensing, and safety frameworks.
+- Looks for: Governance indicators, audit trails, data-sharing regulations.
+- Typical Questions: What are the compliance or regulatory implications?
+
+---
+
+## 🧭 Tips for Expert Decision-Making
+
+- Prioritize insights that align with the most strategic goals.
+- When in doubt, coordinate with Collaboration or Compliance experts.
+- Avoid surface-level insights. Think from a national strategy perspective.
+- Annotate edge cases with comments for review.

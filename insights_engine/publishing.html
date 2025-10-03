@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Data Recommendations - Insights Engine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="nav-bar">
+                <a href="index.html" class="back-btn">← Back to Home</a>
+                <h1 class="page-title">🌐 Open Data Recommendations</h1>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <div class="recommendations-container">
+                <div class="recommendations-header">
+                    <h2>Strategic Publishing Recommendations</h2>
+                    <p>Based on analysis of 1.8M+ global datasets and alignment with your strategic objectives</p>
+                    <div class="filter-bar">
+                        <select id="domainFilter" class="filter-select">
+                            <option value="all">All Domains</option>
+                            <option value="energy">Energy & Environment</option>
+                            <option value="transport">Transportation</option>
+                            <option value="health">Healthcare</option>
+                            <option value="education">Education</option>
+                        </select>
+                        <select id="priorityFilter" class="filter-select">
+                            <option value="all">All Priorities</option>
+                            <option value="high">High Priority</option>
+                            <option value="medium">Medium Priority</option>
+                            <option value="low">Low Priority</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="recommendations-grid">
+                    <div class="recommendation-card high-priority">
+                        <div class="recommendation-header">
+                            <div class="priority-badge high">High Priority</div>
+                            <div class="domain-tag energy">Energy & Environment</div>
+                        </div>
+                        <h3>🔋 National Energy Consumption Patterns</h3>
+                        <p class="recommendation-description">
+                            Comprehensive energy usage data across sectors, aligned with transparency initiatives and climate commitments.
+                        </p>
+                        
+                        <div class="recommendation-details">
+                            <div class="detail-section">
+                                <h4>📈 Strategic Alignment</h4>
+                                <ul>
+                                    <li>Supports Vision 2030 energy diversification goals</li>
+                                    <li>Enables public-private partnerships in energy sector</li>
+                                    <li>Facilitates international climate reporting</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4>🎯 Potential Impact</h4>
+                                <ul>
+                                    <li>Enhanced energy efficiency research</li>
+                                    <li>Improved policy decision making</li>
+                                    <li>Increased investor confidence</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4>📊 Publishing Scope</h4>
+                                <ul>
+                                    <li>Monthly aggregated consumption by sector</li>
+                                    <li>Regional distribution patterns</li>
+                                    <li>Year-over-year trend analysis</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-footer">
+                            <div class="matching-score">
+                                <span class="score-label">Strategic Match:</span>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 92%"></div>
+                                </div>
+                                <span class="score-value">92%</span>
+                            </div>
+                            <div class="recommendation-actions">
+                                <button class="btn btn-primary btn-small">📋 Create Publishing Plan</button>
+                                <button class="btn btn-outline btn-small">🔍 View Similar</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendation-card medium-priority">
+                        <div class="recommendation-header">
+                            <div class="priority-badge medium">Medium Priority</div>
+                            <div class="domain-tag transport">Transportation</div>
+                        </div>
+                        <h3>🚗 Urban Mobility & Traffic Analytics</h3>
+                        <p class="recommendation-description">
+                            Real-time and historical traffic flow data to support smart city initiatives and urban planning decisions.
+                        </p>
+                        
+                        <div class="recommendation-details">
+                            <div class="detail-section">
+                                <h4>📈 Strategic Alignment</h4>
+                                <ul>
+                                    <li>Supports NEOM and smart city development</li>
+                                    <li>Enables data-driven urban planning</li>
+                                    <li>Facilitates transportation innovation</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4>🎯 Potential Impact</h4>
+                                <ul>
+                                    <li>Reduced traffic congestion</li>
+                                    <li>Improved public transportation planning</li>
+                                    <li>Enhanced logistics optimization</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4>📊 Publishing Scope</h4>
+                                <ul>
+                                    <li>Anonymized traffic flow patterns</li>
+                                    <li>Public transport usage statistics</li>
+                                    <li>Infrastructure capacity metrics</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-footer">
+                            <div class="matching-score">
+                                <span class="score-label">Strategic Match:</span>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 78%"></div>
+                                </div>
+                                <span class="score-value">78%</span>
+                            </div>
+                            <div class="recommendation-actions">
+                                <button class="btn btn-primary btn-small">📋 Create Publishing Plan</button>
+                                <button class="btn btn-outline btn-small">🔍 View Similar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pagination">
+                    <button class="btn btn-outline">← Previous</button>
+                    <span class="page-info">Page 1 of 24</span>
+                    <button class="btn btn-outline">Next →</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        // Filter functionality
+        document.getElementById('domainFilter').addEventListener('change', filterRecommendations);
+        document.getElementById('priorityFilter').addEventListener('change', filterRecommendations);
+        
+        function filterRecommendations() {
+            const domainFilter = document.getElementById('domainFilter').value;
+            const priorityFilter = document.getElementById('priorityFilter').value;
+            
+            const cards = document.querySelectorAll('.recommendation-card');
+            
+            cards.forEach(card => {
+                let showCard = true;
+                
+                if (domainFilter !== 'all') {
+                    const domainTag = card.querySelector('.domain-tag');
+                    if (!domainTag.classList.contains(domainFilter)) {
+                        showCard = false;
+                    }
+                }
+                
+                if (priorityFilter !== 'all') {
+                    const priorityBadge = card.querySelector('.priority-badge');
+                    if (!priorityBadge.classList.contains(priorityFilter.replace('priority', ''))) {
+                        showCard = false;
+                    }
+                }
+                
+                card.style.display = showCard ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>

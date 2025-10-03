@@ -1,0 +1,70 @@
+{
+    "solar": [
+        "Resource Expert",
+        "Energy Efficiency Expert"
+    ],
+    "irradiance": [
+        "Resource Expert",
+        "Forecasting Expert"
+    ],
+    "PV": [
+        "Resource Expert",
+        "Financial Feasibility Expert",
+        "O&M Optimization Expert"
+    ],
+    "rooftop": [
+        "Energy Efficiency Expert",
+        "Smart Grid Expert"
+    ],
+    "wind": [
+        "Resource Expert",
+        "Forecasting Expert"
+    ],
+    "hybrid": [
+        "Hybrid Systems Expert"
+    ],
+    "grid": [
+        "Grid Reliability Expert",
+        "Smart Grid Expert"
+    ],
+    "storage": [
+        "Hybrid Systems Expert",
+        "Grid Reliability Expert"
+    ],
+    "forecast": [
+        "Forecasting Expert"
+    ],
+    "GHG": [
+        "Sustainability Impact Expert"
+    ],
+    "carbon": [
+        "Sustainability Impact Expert"
+    ],
+    "maintenance": [
+        "O&M Optimization Expert"
+    ],
+    "cost": [
+        "Financial Feasibility Expert"
+    ],
+    "investment": [
+        "Financial Feasibility Expert",
+        "Sustainability Impact Expert"
+    ],
+    "compliance": [
+        "Regulatory Compliance Expert"
+    ],
+    "regulation": [
+        "Regulatory Compliance Expert"
+    ],
+    "stakeholder": [
+        "Collaboration Expert"
+    ],
+    "sharing": [
+        "Collaboration Expert",
+        "Regulatory Compliance Expert"
+    ],
+    "safety": [
+        "Sustainability Impact Expert",
+        "Regulatory Compliance Expert"
+    ]
+}

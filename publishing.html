@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Data Recommendations - Insights Engine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="nav-bar">
+                <a href="index.html" class="back-btn">← Back to Home</a>
+                <h1 class="page-title">🌐 Open Data Recommendations</h1>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <div class="recommendations-container">
+                <div class="recommendations-header">
+                    <h2>Strategic Publishing Recommendations</h2>
+                    <p>Based on analysis of 1.8M+ global datasets and alignment with your strategic objectives</p>
+                    <div class="filter-bar">
+                        <select id="domainFilter" class="filter-select">
+                            <option value="all">All Domains</option>
+                            <option value="energy">Energy & Environment</option>
+                            <option value="transport">Transportation</option>
+                            <option value="health">Healthcare</option>
+                            <option value="education">Education</option>
+                        </select>
+                        <select id="priorityFilter" class="filter-select">
+                            <option value="all">All Priorities</option>
+                            <option value="high">High Priority</option>
+                            <option value="medium">Medium Priority</option>
+                            <option value="low">Low Priority</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="recommendationsGrid" class="recommendations-grid">
+                    <!-- Recommendations will be dynamically rendered here -->
+                </div>
+                
+                <div class="load-more-section">
+                    <button id="loadMoreBtn" class="btn btn-outline" onclick="loadMoreRecommendations()">🔄 Load More Recommendations</button>
+                    <div class="results-info">
+                        <span id="resultsCount">Showing 0 of 0 results</span>
+                    </div>
+                </div>
+                
+                <div class="pagination">
+                    <button class="btn btn-outline">← Previous</button>
+                    <span class="page-info">Page 1 of 24</span>
+                    <button class="btn btn-outline">Next →</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        // Global variables for recommendations
+        let allRecommendations = [];
+        let filteredRecommendations = [];
+        let displayedCount = 0;
+        const ITEMS_PER_LOAD = 6;
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            generateAllRecommendations();
+            renderRecommendations();
+            
+            // Setup event listeners
+            document.getElementById('domainFilter').addEventListener('change', filterRecommendations);
+            document.getElementById('priorityFilter').addEventListener('change', filterRecommendations);
+        });
+        
+        function generateAllRecommendations() {
+            const recommendationTemplates = [
+                {
+                    domain: 'energy',
+                    priority: 'high',
+                    title: '🔋 National Energy Consumption Patterns',
+                    description: 'Comprehensive energy usage data across sectors, aligned with transparency initiatives and climate commitments.',
+                    strategicAlignment: ['Vision 2030 energy diversification', 'Saudi Green Initiative', 'Net Zero commitments'],
+                    impact: ['Enhanced energy efficiency research', 'Improved policy decision making', 'Increased investor confidence'],
+                    scope: ['Monthly aggregated consumption by sector', 'Regional distribution patterns', 'Year-over-year trend analysis'],
+                    strategicScore: 92
+                },
+                {
+                    domain: 'transport',
+                    priority: 'medium',
+                    title: '🚗 Urban Mobility & Traffic Analytics',
+                    description: 'Real-time and historical traffic flow data to support smart city initiatives and urban planning decisions.',
+                    strategicAlignment: ['NEOM smart city development', 'Data-driven urban planning', 'Transportation innovation'],
+                    impact: ['Reduced traffic congestion', 'Improved public transportation', 'Enhanced logistics optimization'],
+                    scope: ['Anonymized traffic flow patterns', 'Public transport usage statistics', 'Infrastructure capacity metrics'],
+                    strategicScore: 78
+                },
+                {
+                    domain: 'health',
+                    priority: 'high',
+                    title: '🏥 Healthcare Resource Distribution',
+                    description: 'Geographic distribution of healthcare facilities, equipment, and personnel to optimize healthcare accessibility.',
+                    strategicAlignment: ['Healthcare accessibility improvement', 'Quality of Life Program', 'Regional healthcare equity'],
+                    impact: ['Improved healthcare access', 'Better resource allocation', 'Enhanced emergency response'],
+                    scope: ['Hospital and clinic locations', 'Medical equipment inventory', 'Healthcare personnel distribution'],
+                    strategicScore: 89
+                },
+                {
+                    domain: 'education',
+                    priority: 'medium',
+                    title: '🎓 Educational Performance Analytics',
+                    description: 'Student performance metrics and educational outcome data to enhance national education standards.',
+                    strategicAlignment: ['Human Capital Development', 'Education quality improvement', 'Skills-based economy transition'],
+                    impact: ['Enhanced educational outcomes', 'Evidence-based policy making', 'Skills gap identification'],
+                    scope: ['Academic performance indicators', 'School infrastructure metrics', 'Teacher effectiveness data'],
+                    strategicScore: 76
+                },
+                {
+                    domain: 'environment',
+                    priority: 'high',
+                    title: '🌱 Environmental Monitoring Data',
+                    description: 'Air quality, water quality, and environmental impact data supporting sustainability initiatives.',
+                    strategicAlignment: ['Saudi Green Initiative', 'Environmental protection', 'Climate change mitigation'],
+                    impact: ['Improved environmental health', 'Better policy compliance', 'Enhanced public awareness'],
+                    scope: ['Air quality measurements', 'Water quality indicators', 'Pollution source tracking'],
+                    strategicScore: 85
+                },
+                {
+                    domain: 'economic',
+                    priority: 'medium',
+                    title: '💼 Economic Indicators & Business Statistics',
+                    description: 'Comprehensive economic data supporting business development and investment decisions.',
+                    strategicAlignment: ['Economic diversification', 'Private sector development', 'Investment attraction'],
+                    impact: ['Enhanced business planning', 'Improved investment climate', 'Better economic forecasting'],
+                    scope: ['GDP sector breakdown', 'Business registration data', 'Investment flow metrics'],
+                    strategicScore: 73
+                },
+                {
+                    domain: 'energy',
+                    priority: 'medium',
+                    title: '⚡ Renewable Energy Production Statistics',
+                    description: 'Solar, wind, and other renewable energy production data supporting green transition goals.',
+                    strategicAlignment: ['Renewable energy targets', 'Carbon neutrality goals', 'Energy security enhancement'],
+                    impact: ['Accelerated green transition', 'Enhanced energy planning', 'Investment in renewables'],
+                    scope: ['Solar production capacity', 'Wind energy output', 'Renewable energy growth trends'],
+                    strategicScore: 88
+                },
+                {
+                    domain: 'transport',
+                    priority: 'high',
+                    title: '🚆 Public Transportation Usage Data',
+                    description: 'Metro, bus, and public transport ridership data to optimize urban mobility systems.',
+                    strategicAlignment: ['Sustainable mobility', 'Public transport optimization', 'Urban planning support'],
+                    impact: ['Improved service efficiency', 'Reduced traffic congestion', 'Better route planning'],
+                    scope: ['Ridership statistics', 'Route efficiency metrics', 'Service quality indicators'],
+                    strategicScore: 81
+                },
+                {
+                    domain: 'health',
+                    priority: 'medium',
+                    title: '📊 Public Health Surveillance Data',
+                    description: 'Disease surveillance and public health monitoring data for proactive health management.',
+                    strategicAlignment: ['Public health protection', 'Healthcare system strengthening', 'Emergency preparedness'],
+                    impact: ['Early disease detection', 'Better health outcomes', 'Enhanced pandemic readiness'],
+                    scope: ['Disease incidence rates', 'Vaccination coverage', 'Health trend analysis'],
+                    strategicScore: 83
+                },
+                {
+                    domain: 'education',
+                    priority: 'low',
+                    title: '📚 Library & Digital Resources Usage',
+                    description: 'Public library usage and digital resource access data supporting literacy and knowledge initiatives.',
+                    strategicAlignment: ['Digital literacy promotion', 'Knowledge society development', 'Educational access equity'],
+                    impact: ['Enhanced digital literacy', 'Improved resource allocation', 'Better educational access'],
+                    scope: ['Library visitor statistics', 'Digital resource usage', 'Geographic access patterns'],
+                    strategicScore: 65
+                },
+                {
+                    domain: 'environment',
+                    priority: 'medium',
+                    title: '🌊 Water Resource Management Data',
+                    description: 'Water consumption, quality, and conservation data supporting sustainable water management.',
+                    strategicAlignment: ['Water security', 'Sustainable resource management', 'Environmental conservation'],
+                    impact: ['Improved water efficiency', 'Better conservation planning', 'Enhanced water security'],
+                    scope: ['Water consumption patterns', 'Quality monitoring data', 'Conservation effectiveness metrics'],
+                    strategicScore: 79
+                },
+                {
+                    domain: 'economic',
+                    priority: 'high',
+                    title: '🏢 SME Development & Support Data',
+                    description: 'Small and medium enterprise support program data and business development metrics.',
+                    strategicAlignment: ['Private sector development', 'Entrepreneurship promotion', 'Economic diversification'],
+                    impact: ['Enhanced SME growth', 'Improved business support', 'Job creation facilitation'],
+                    scope: ['SME registration trends', 'Support program effectiveness', 'Business success metrics'],
+                    strategicScore: 86
+                },
+                {
+                    domain: 'energy',
+                    priority: 'low',
+                    title: '🔋 Energy Efficiency Program Results',
+                    description: 'Results and impact data from national energy efficiency initiatives and programs.',
+                    strategicAlignment: ['Energy efficiency targets', 'Cost reduction goals', 'Environmental protection'],
+                    impact: ['Demonstrated efficiency gains', 'Cost savings documentation', 'Program optimization'],
+                    scope: ['Efficiency improvement metrics', 'Cost savings data', 'Program participation rates'],
+                    strategicScore: 72
+                },
+                {
+                    domain: 'transport',
+                    priority: 'low',
+                    title: '🛣️ Infrastructure Development Progress',
+                    description: 'Transportation infrastructure development and maintenance data supporting urban planning.',
+                    strategicAlignment: ['Infrastructure modernization', 'Urban development support', 'Economic growth facilitation'],
+                    impact: ['Better infrastructure planning', 'Improved maintenance scheduling', 'Enhanced connectivity'],
+                    scope: ['Construction progress data', 'Maintenance schedules', 'Infrastructure condition assessments'],
+                    strategicScore: 69
+                },
+                {
+                    domain: 'health',
+                    priority: 'low',
+                    title: '👨‍⚕️ Healthcare Professional Development',
+                    description: 'Medical professional training, certification, and development program data.',
+                    strategicAlignment: ['Healthcare workforce development', 'Medical education enhancement', 'Health system strengthening'],
+                    impact: ['Improved healthcare quality', 'Better workforce planning', 'Enhanced medical education'],
+                    scope: ['Training program outcomes', 'Certification statistics', 'Professional development metrics'],
+                    strategicScore: 71
+                },
+                {
+                    domain: 'education',
+                    priority: 'high',
+                    title: '💻 Digital Education Platform Usage',
+                    description: 'Online learning platform usage and digital education effectiveness data.',
+                    strategicAlignment: ['Digital transformation in education', 'Remote learning capabilities', 'Educational innovation'],
+                    impact: ['Enhanced digital learning', 'Improved educational access', 'Better learning outcomes'],
+                    scope: ['Platform usage statistics', 'Learning outcome metrics', 'Digital engagement patterns'],
+                    strategicScore: 82
+                },
+                {
+                    domain: 'environment',
+                    priority: 'low',
+                    title: '🌲 Biodiversity & Conservation Data',
+                    description: 'Wildlife conservation, protected areas, and biodiversity monitoring data.',
+                    strategicAlignment: ['Environmental conservation', 'Biodiversity protection', 'Ecosystem preservation'],
+                    impact: ['Enhanced conservation efforts', 'Better ecosystem management', 'Improved environmental awareness'],
+                    scope: ['Species population data', 'Protected area statistics', 'Conservation program effectiveness'],
+                    strategicScore: 68
+                },
+                {
+                    domain: 'economic',
+                    priority: 'low',
+                    title: '📋 Government Procurement Data',
+                    description: 'Government procurement processes, spending, and vendor performance data.',
+                    strategicAlignment: ['Government transparency', 'Procurement efficiency', 'Economic participation'],
+                    impact: ['Increased transparency', 'Better vendor competition', 'Improved procurement efficiency'],
+                    scope: ['Procurement volume data', 'Vendor performance metrics', 'Spending transparency reports'],
+                    strategicScore: 75
+                }
+            ];
+            
+            // Add IDs and additional properties
+            allRecommendations = recommendationTemplates.map((rec, index) => ({
+                ...rec,
+                id: `rec_${index + 1}`,
+                domainClass: rec.domain,
+                priorityClass: rec.priority
+            }));
+            
+            // Sort by strategic score (highest first)
+            allRecommendations.sort((a, b) => b.strategicScore - a.strategicScore);
+            
+            filteredRecommendations = [...allRecommendations];
+        }
+        
+        function renderRecommendations() {
+            const grid = document.getElementById('recommendationsGrid');
+            const nextBatch = filteredRecommendations.slice(displayedCount, displayedCount + ITEMS_PER_LOAD);
+            
+            nextBatch.forEach(rec => {
+                const card = createRecommendationCard(rec);
+                grid.appendChild(card);
+            });
+            
+            displayedCount += nextBatch.length;
+            updateResultsInfo();
+            updateLoadMoreButton();
+        }
+        
+        function createRecommendationCard(rec) {
+            const card = document.createElement('div');
+            card.className = `recommendation-card ${rec.priorityClass}-priority`;
+            card.dataset.domain = rec.domainClass;
+            card.dataset.priority = rec.priorityClass;
+            
+            card.innerHTML = `
+                <div class="recommendation-header">
+                    <div class="priority-badge ${rec.priorityClass}">${rec.priority.charAt(0).toUpperCase() + rec.priority.slice(1)} Priority</div>
+                    <div class="domain-tag ${rec.domainClass}">${getDomainDisplayName(rec.domainClass)}</div>
+                </div>
+                <h3>${rec.title}</h3>
+                <p class="recommendation-description">${rec.description}</p>
+                
+                <div class="recommendation-details">
+                    <div class="detail-section">
+                        <h4>📈 Strategic Alignment</h4>
+                        <ul>
+                            ${rec.strategicAlignment.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4>🎯 Potential Impact</h4>
+                        <ul>
+                            ${rec.impact.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4>📊 Publishing Scope</h4>
+                        <ul>
+                            ${rec.scope.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="recommendation-footer">
+                    <div class="matching-score">
+                        <span class="score-label">Strategic Match:</span>
+                        <div class="score-bar">
+                            <div class="score-fill" style="width: ${rec.strategicScore}%"></div>
+                        </div>
+                        <span class="score-value">${rec.strategicScore}%</span>
+                    </div>
+                    <div class="recommendation-actions">
+                        <button class="btn btn-primary btn-small" onclick="createPublishingPlan('${rec.id}')">📋 Create Publishing Plan</button>
+                        <button class="btn btn-outline btn-small" onclick="viewSimilar('${rec.id}')">🔍 View Similar</button>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+        
+        function getDomainDisplayName(domain) {
+            const domainNames = {
+                'energy': 'Energy & Environment',
+                'transport': 'Transportation',
+                'health': 'Healthcare',
+                'education': 'Education',
+                'environment': 'Environment',
+                'economic': 'Economics & Business'
+            };
+            return domainNames[domain] || domain;
+        }
+        
+        function filterRecommendations() {
+            const domainFilter = document.getElementById('domainFilter').value;
+            const priorityFilter = document.getElementById('priorityFilter').value;
+            
+            // Reset display
+            document.getElementById('recommendationsGrid').innerHTML = '';
+            displayedCount = 0;
+            
+            // Apply filters
+            filteredRecommendations = allRecommendations.filter(rec => {
+                const domainMatch = domainFilter === 'all' || rec.domainClass === domainFilter;
+                const priorityMatch = priorityFilter === 'all' || rec.priorityClass === priorityFilter;
+                return domainMatch && priorityMatch;
+            });
+            
+            renderRecommendations();
+        }
+        
+        function loadMoreRecommendations() {
+            renderRecommendations();
+        }
+        
+        function updateResultsInfo() {
+            const resultsCount = document.getElementById('resultsCount');
+            resultsCount.textContent = `Showing ${displayedCount} of ${filteredRecommendations.length} results`;
+        }
+        
+        function updateLoadMoreButton() {
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            if (displayedCount >= filteredRecommendations.length) {
+                loadMoreBtn.style.display = 'none';
+            } else {
+                loadMoreBtn.style.display = 'block';
+            }
+        }
+        
+        function createPublishingPlan(recId) {
+            const recommendation = allRecommendations.find(r => r.id === recId);
+            if (!recommendation) return;
+            
+            const modal = createPublishingPlanModal(recommendation);
+            document.body.appendChild(modal);
+            modal.style.display = 'block';
+        }
+        
+        function createPublishingPlanModal(recommendation) {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content large">
+                    <div class="modal-header">
+                        <h3>📋 Create Publishing Plan</h3>
+                        <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>${recommendation.title}</h4>
+                        <div class="publishing-plan-form">
+                            <div class="form-section">
+                                <h5>📅 Timeline Configuration</h5>
+                                <div class="form-group">
+                                    <label>Publishing Timeline:</label>
+                                    <select id="timeline" class="form-control">
+                                        <option value="immediate">Immediate (1-3 months)</option>
+                                        <option value="short">Short-term (3-6 months)</option>
+                                        <option value="medium" selected>Medium-term (6-12 months)</option>
+                                        <option value="long">Long-term (12+ months)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Update Frequency:</label>
+                                    <select id="frequency" class="form-control">
+                                        <option value="daily">Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly" selected>Monthly</option>
+                                        <option value="quarterly">Quarterly</option>
+                                        <option value="annually">Annually</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h5>🔒 Data Privacy & Security</h5>
+                                <div class="checkbox-group">
+                                    <label><input type="checkbox" checked> Apply data anonymization</label>
+                                    <label><input type="checkbox" checked> Remove personal identifiers</label>
+                                    <label><input type="checkbox"> Apply geographic aggregation</label>
+                                    <label><input type="checkbox" checked> Include data quality metrics</label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h5>📦 Publishing Format</h5>
+                                <div class="checkbox-group">
+                                    <label><input type="checkbox" checked> CSV format</label>
+                                    <label><input type="checkbox" checked> JSON format</label>
+                                    <label><input type="checkbox"> XML format</label>
+                                    <label><input type="checkbox" checked> API access</label>
+                                    <label><input type="checkbox"> Dashboard visualization</label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h5>📊 Success Metrics</h5>
+                                <div class="metrics-list">
+                                    <div class="metric-item">
+                                        <span>Download Count Target:</span>
+                                        <input type="number" value="1000" class="form-control small">
+                                        <span>per month</span>
+                                    </div>
+                                    <div class="metric-item">
+                                        <span>API Usage Target:</span>
+                                        <input type="number" value="5000" class="form-control small">
+                                        <span>requests per month</span>
+                                    </div>
+                                    <div class="metric-item">
+                                        <span>User Engagement Target:</span>
+                                        <input type="number" value="500" class="form-control small">
+                                        <span>active users</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="plan-actions">
+                            <button class="btn btn-primary" onclick="generatePlan('${recommendation.id}')">🚀 Generate Complete Plan</button>
+                            <button class="btn btn-outline" onclick="saveDraft('${recommendation.id}')">💾 Save as Draft</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            return modal;
+        }
+        
+        function viewSimilar(recId) {
+            const recommendation = allRecommendations.find(r => r.id === recId);
+            if (!recommendation) return;
+            
+            // Find similar recommendations based on domain and strategic score
+            const similarRecs = allRecommendations.filter(r => 
+                r.id !== recId && 
+                (r.domainClass === recommendation.domainClass || 
+                 Math.abs(r.strategicScore - recommendation.strategicScore) <= 10)
+            ).slice(0, 5);
+            
+            const modal = createSimilarRecommendationsModal(recommendation, similarRecs);
+            document.body.appendChild(modal);
+            modal.style.display = 'block';
+        }
+        
+        function createSimilarRecommendationsModal(original, similarRecs) {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content large">
+                    <div class="modal-header">
+                        <h3>🔍 Similar Recommendations</h3>
+                        <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="similar-header">
+                            <h4>Based on: ${original.title}</h4>
+                            <p>Domain: ${getDomainDisplayName(original.domainClass)} | Strategic Score: ${original.strategicScore}%</p>
+                        </div>
+                        
+                        <div class="similar-list">
+                            ${similarRecs.map(rec => `
+                                <div class="similar-item">
+                                    <div class="similar-header-row">
+                                        <h5>${rec.title}</h5>
+                                        <div class="similar-meta">
+                                            <span class="domain-badge">${getDomainDisplayName(rec.domainClass)}</span>
+                                            <span class="score-badge">${rec.strategicScore}%</span>
+                                        </div>
+                                    </div>
+                                    <p>${rec.description}</p>
+                                    <div class="similar-actions">
+                                        <button class="btn btn-outline btn-small" onclick="createPublishingPlan('${rec.id}')">📋 Create Plan</button>
+                                        <button class="btn btn-outline btn-small" onclick="addToComparison('${rec.id}')">🔄 Compare</button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        ${similarRecs.length === 0 ? '<p class="no-similar">No similar recommendations found.</p>' : ''}
+                    </div>
+                </div>
+            `;
+            return modal;
+        }
+        
+        function generatePlan(recId) {
+            // Simulate plan generation
+            alert(`🚀 Publishing plan generated for recommendation ${recId}!\n\nPlan includes:\n• Implementation timeline\n• Resource requirements\n• Risk mitigation strategies\n• Success metrics\n• Stakeholder engagement plan`);
+        }
+        
+        function saveDraft(recId) {
+            alert(`💾 Draft saved for recommendation ${recId}!`);
+        }
+        
+        function addToComparison(recId) {
+            alert(`🔄 Added recommendation ${recId} to comparison list!`);
+        }
+    </script>
+</body>
+</html>

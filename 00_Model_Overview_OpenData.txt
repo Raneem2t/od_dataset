@@ -1,0 +1,68 @@
+# 📄 00_Model_Overview_OpenData.txt
+
+## 🧠 Insights Engine - Open Data Recommendation Model
+
+This file outlines the architecture and purpose of the Insights Engine's second core function: generating publishing recommendations for open data based on a large-scale global dataset repository.
+
+---
+
+## 🌐 Purpose
+
+To assist government entities in identifying high-value datasets to publish as open data, based on:
+- Global publishing trends (1.8M+ datasets)
+- The entity’s strategic scope and 100 national objectives
+- Contextual similarity and reuse potential
+
+---
+
+## 🎯 Function
+
+The model analyzes the entity’s mandate and matches it to similar datasets already published worldwide. It then suggests publishing candidates that are:
+- Aligned with strategic goals
+- Commonly reused globally
+- Technically feasible and non-sensitive
+
+---
+
+## 📥 Inputs
+
+- Strategic objectives of the entity
+- Domain scope keywords (e.g. energy, environment, regulation)
+- Access to the global open dataset repository
+- (Optional) list of datasets currently under consideration
+
+---
+
+## 📤 Outputs
+
+- Ranked list of open data publishing recommendations
+- Each recommendation includes:
+  - Suggested dataset name and description
+  - Reason for relevance
+  - Global reuse evidence
+  - Strategic objective(s) it supports
+  - Potential value if published
+
+---
+
+## 🧩 Context Rules
+
+- The engine only selects from the global dataset repository (no generation from scratch).
+- It cannot recommend datasets that conflict with the entity’s legal, regulatory, or sensitivity constraints.
+- Strategic alignment is mandatory for all suggestions.
+
+---
+
+## 📁 Used By
+
+- Data Offices and Policy Teams in Government Entities
+- Strategic Planning & Transparency Divisions
+- Open Data Portals and Task Forces
+
+---
+
+## 🔄 Interaction with Other Components
+
+- Shares context with the Use Case generation model
+- Leverages same 100-objective strategy file
+- Reuses keyword/domain mapping logic

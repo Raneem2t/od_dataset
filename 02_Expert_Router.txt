@@ -1,0 +1,76 @@
+# 📄 02_Expert_Router.txt
+
+## 🔀 Expert Router Overview
+
+The Expert Router is a central component of the Insights Engine MoE architecture. It is responsible for intelligently selecting which expert(s) should handle a specific dataset input based on contextual understanding.
+
+---
+
+## 🎯 Purpose
+
+- To route each dataset to the most relevant expert(s) based on its content and strategic alignment.
+- To reduce unnecessary computation by activating only the required experts.
+- To improve precision and relevance in the generated outputs (use cases or recommendations).
+
+---
+
+## 🧠 How It Works
+
+### Input Analyzed:
+- Dataset Name
+- Dataset Description
+- Keywords
+
+### Context Sources:
+- Strategy and Objectives File
+- Keyword-to-Expert Mapping
+- Expert Roles and Capabilities
+- Historical Feedback (optional)
+
+---
+
+## ⚙️ Routing Logic
+
+1. Extract and interpret the domain and intent from the input.
+2. Match relevant domains to expert areas using:
+   - Keyword patterns
+   - Semantic similarity (NLP)
+   - Rule-based logic tied to strategy
+3. Select the minimum viable set of experts necessary to produce a high-quality, context-aware response.
+
+---
+
+## 📌 Example Routing Scenarios
+
+| Input Theme                        | Routed To                                      |
+|-----------------------------------|------------------------------------------------|
+| "solar irradiance + performance"  | Resource Expert, Forecasting Expert            |
+| "grid congestion analysis"        | Grid Reliability Expert, Smart Grid Expert     |
+| "maintenance cost optimization"   | O&M Expert, Financial Feasibility Expert       |
+| "carbon impact of PV"             | Sustainability Expert, Resource Expert         |
+| "stakeholder data sharing"        | Collaboration Expert, Regulatory Expert        |
+
+---
+
+## 🔁 Fallback and Multi-Expert Routing
+
+- If the dataset is ambiguous, the router may:
+  - Route to a broader set of experts
+  - Include the Collaboration Expert by default
+  - Request clarification from the user (optional)
+
+---
+
+## 🔐 Constraints
+
+- The router only considers experts defined in the system.
+- Routing must align with the organization’s strategy and scope.
+- It does not activate experts for inputs outside strategic relevance.
+
+---
+
+## 📦 Output
+
+The router returns:
+- A list of expert identifiers selected for activation
+- A rationale or confidence score (optional)

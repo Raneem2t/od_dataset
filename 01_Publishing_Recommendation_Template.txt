@@ -1,0 +1,50 @@
+# 📄 01_Publishing_Recommendation_Template.txt
+
+## 📝 Open Data Publishing Recommendation Template
+
+Use this structure to generate each publishing recommendation. It ensures consistency, strategic relevance, and reusability insights for decision-makers.
+
+---
+
+### 📌 1. Suggested Dataset Title
+A clear and concise title for the dataset that should be published.
+
+### 🧾 2. Description
+Brief description of what the dataset includes (scope, time coverage, resolution, etc.).
+
+### 🌍 3. Global Publishing Evidence
+- Examples of similar datasets published globally (include platforms or links if possible).
+- Optional: number of countries/platforms where similar data is available.
+
+### 🧭 4. Strategic Relevance
+- What national strategic objective(s) does this support?
+- Why is this data valuable to publish in the local context?
+
+### 💡 5. Anticipated Value
+What is the expected benefit of publishing this dataset?
+- Possible reuse by industry, academia, or public
+- Transparency or accountability improvement
+- Enabling innovation or new services
+
+### 🔒 6. Sensitivity Review Notes
+Does this data require any anonymization or restriction?
+Any flags for legal, ethical, or technical concerns?
+
+### 📊 7. Recommended Format / Frequency
+What file format(s) and publishing schedule are best suited?
+
+---
+
+## 📁 Example Output
+
+```json
+{
+  "title": "Hourly Solar Irradiance Data - National Coverage",
+  "description": "Includes GHI, DNI, and DHI values collected hourly from ground stations across the country.",
+  "global_evidence": ["data.gov.au", "data.gov", "energydata.info"],
+  "strategic_objectives": [4, 36, 87],
+  "anticipated_value": "Supports renewable energy planning, research, and transparency for investors.",
+  "sensitivity_notes": "Ensure site-level coordinates are generalized before publishing.",
+  "format_frequency": "CSV, updated monthly"
+}
+```

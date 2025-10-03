@@ -1,0 +1,62 @@
+# 📄 04_Publishing_Matching_Logic.txt
+
+## 🔍 Matching Logic Between Global Open Data and Local Scope
+
+This file outlines the logic used to match global datasets with the strategic scope of the local entity.
+
+---
+
+## 🌐 Global Dataset Repository
+
+Contains over 1.8 million records from global platforms (e.g., data.gov, data.europa.eu, etc.).
+
+---
+
+## 🎯 Matching Goals
+
+- Identify datasets already published globally that overlap with the entity’s strategic domains.
+- Filter and prioritize datasets that align with national objectives and local needs.
+
+---
+
+## 🧮 Matching Steps
+
+### Step 1: Preprocessing Global Records
+- Extract and normalize metadata: title, description, tags, publisher, topics.
+- Translate metadata to English where applicable.
+
+### Step 2: Strategic Keyword Filtering
+- Use curated list of keywords from `03_Publishing_Strategy_Routing.txt`.
+- Discard datasets with no overlap in domain relevance.
+
+### Step 3: Similarity Scoring
+- Compute similarity between global dataset metadata and domain keywords using:
+  - TF-IDF + cosine similarity
+  - BERT embedding similarity (if available)
+
+### Step 4: Priority Boosters
+Apply score boosts for:
+- Datasets published by >3 countries
+- High download or reuse count (if available)
+- Matches multiple strategic pillars
+- Matches previous internal publishing interest
+
+### Step 5: Final Filtering
+- Remove duplicates
+- Apply publishing eligibility criteria (non-sensitive, open license, not already published)
+
+---
+
+## 📌 Matching Output
+
+Each match includes:
+- Global dataset title and link
+- Similarity score
+- Suggested strategic objective(s)
+- Notes on why it’s relevant for local publishing
+
+---
+
+## 🧠 Use Case
+
+Use this logic to generate intelligent, evidence-backed publishing suggestions from a noisy, global dataset pool.

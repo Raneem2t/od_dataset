@@ -1,0 +1,26 @@
+{
+    "recommendation_id": "string",
+    "input_id": "string",
+    "timestamp": "ISO8601 format",
+    "dataset_title": "string",
+    "description": "string",
+    "global_evidence": [
+        "example-platform-1.org",
+        "example-platform-2.gov"
+    ],
+    "linked_objectives": [
+        {
+            "id": 4,
+            "description": "Innovate solar radiation measurement in desert environments"
+        },
+        {
+            "id": 87,
+            "description": "Commercialize high-resolution renewable energy datasets"
+        }
+    ],
+    "anticipated_value": "Clear summary of expected impact of publishing this dataset",
+    "sensitivity_notes": "Any publishing concerns or restrictions",
+    "recommended_format": "CSV, updated quarterly",
+    "score": 4.75,
+    "final_decision": "accepted | needs_review | rejected"
+}

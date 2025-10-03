@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Use Cases - Insights Engine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="nav-bar">
+                <a href="index.html" class="back-btn">← Back to Home</a>
+                <h1 class="page-title">🧠 Generate Use Cases</h1>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Dataset Metadata Input</h2>
+                    <p>Provide dataset information to generate strategic use cases aligned with national objectives</p>
+                </div>
+                
+                <form id="usecaseForm" class="dataset-form">
+                    <div class="form-group">
+                        <label for="datasetName">Dataset Name *</label>
+                        <input type="text" id="datasetName" name="datasetName" required 
+                               placeholder="e.g., Renewable Energy Production Statistics">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="datasetDescription">Dataset Description *</label>
+                        <textarea id="datasetDescription" name="datasetDescription" required rows="6"
+                                placeholder="Describe the dataset content, scope, time period, and data sources..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="keywords">Keywords</label>
+                        <input type="text" id="keywords" name="keywords" 
+                               placeholder="renewable energy, solar, wind, sustainability (comma-separated)">
+                        <small class="form-hint">Separate keywords with commas</small>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <span class="btn-icon">⚡</span>
+                            Generate Use Cases
+                        </button>
+                        <button type="reset" class="btn btn-outline">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div id="loadingSection" class="loading-section" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Analyzing dataset and routing to domain experts...</p>
+            </div>
+            
+            <div id="resultsSection" class="results-section" style="display: none;">
+                <div class="results-header">
+                    <h3>Generated Use Cases</h3>
+                    <div class="expert-routing">
+                        <span class="routing-label">Routed to experts:</span>
+                        <div id="routedExperts" class="expert-tags"></div>
+                    </div>
+                </div>
+                
+                <div id="usecaseResults" class="usecase-results">
+                    <!-- Results will be populated here -->
+                </div>
+                
+                <div class="results-actions">
+                    <button class="btn btn-outline" onclick="exportResults()">📄 Export Results</button>
+                    <button class="btn btn-outline" onclick="generateNew()">🔄 Generate New</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        document.getElementById('usecaseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            generateUseCases();
+        });
+        
+        function generateUseCases() {
+            const formData = {
+                name: document.getElementById('datasetName').value,
+                description: document.getElementById('datasetDescription').value,
+                keywords: document.getElementById('keywords').value.split(',').map(k => k.trim()).filter(k => k)
+            };
+            
+            // Show loading
+            document.querySelector('.form-container').style.display = 'none';
+            document.getElementById('loadingSection').style.display = 'block';
+            
+            // Simulate API call
+            setTimeout(() => {
+                showMockResults(formData);
+            }, 3000);
+        }
+        
+        function showMockResults(formData) {
+            document.getElementById('loadingSection').style.display = 'none';
+            document.getElementById('resultsSection').style.display = 'block';
+            
+            // Mock expert routing
+            const mockExperts = ['Energy Efficiency Expert', 'Sustainability Expert', 'Infrastructure Expert'];
+            const expertTags = mockExperts.map(expert => `<span class="expert-tag">${expert}</span>`).join('');
+            document.getElementById('routedExperts').innerHTML = expertTags;
+            
+            // Mock results
+            const mockResults = `
+                <div class="usecase-item">
+                    <h4>🏢 Smart Grid Optimization</h4>
+                    <p><strong>Objective:</strong> Optimize national energy distribution through renewable integration</p>
+                    <p><strong>Implementation:</strong> Use production statistics to identify peak generation periods and optimize grid load balancing.</p>
+                    <div class="usecase-tags">
+                        <span class="tag">Energy Security</span>
+                        <span class="tag">Infrastructure</span>
+                    </div>
+                </div>
+                
+                <div class="usecase-item">
+                    <h4>📊 Policy Impact Assessment</h4>
+                    <p><strong>Objective:</strong> Measure effectiveness of renewable energy incentives</p>
+                    <p><strong>Implementation:</strong> Track production trends against policy implementation timelines.</p>
+                    <div class="usecase-tags">
+                        <span class="tag">Policy</span>
+                        <span class="tag">Analytics</span>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('usecaseResults').innerHTML = mockResults;
+        }
+        
+        function exportResults() {
+            alert('Export functionality would be implemented here');
+        }
+        
+        function generateNew() {
+            document.getElementById('resultsSection').style.display = 'none';
+            document.querySelector('.form-container').style.display = 'block';
+            document.getElementById('usecaseForm').reset();
+        }
+    </script>
+</body>
+</html>

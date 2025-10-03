@@ -1,0 +1,93 @@
+# 📄 02_Publishing_Evaluation_Criteria.txt
+
+## 📊 Evaluation Criteria for Open Data Publishing Recommendations
+
+This file defines how each recommendation is assessed before final approval for publication.
+
+---
+
+## 📐 Evaluation Dimensions
+
+### 1. Strategic Alignment (Weight: 35%)
+- Does the dataset support one or more national strategic objectives?
+- Is the relevance justified clearly?
+
+Scoring:
+- 5 = Strong and well-justified alignment
+- 3 = Partially aligned with some rationale
+- 1 = Weak or no alignment
+
+---
+
+### 2. Global Benchmarking (Weight: 20%)
+- Is this dataset commonly published by other governments globally?
+- Is there evidence of reuse elsewhere?
+
+Scoring:
+- 5 = Commonly published and reused globally
+- 3 = Published in a few cases
+- 1 = Rare or no precedent
+
+---
+
+### 3. Potential Value (Weight: 25%)
+- Will the dataset enable reuse, innovation, or increased transparency?
+- Does it have impact across sectors?
+
+Scoring:
+- 5 = High value with broad impact
+- 3 = Moderate value
+- 1 = Low value or uncertain benefit
+
+---
+
+### 4. Sensitivity & Readiness (Weight: 10%)
+- Are there any sensitivity concerns (privacy, security)?
+- Is the data ready for publication or requires major processing?
+
+Scoring:
+- 5 = Fully publishable with minimal risk
+- 3 = Requires anonymization or internal approval
+- 1 = Not ready or too sensitive
+
+---
+
+### 5. Clarity & Quality of Recommendation (Weight: 10%)
+- Is the recommendation well-structured, justified, and actionable?
+
+Scoring:
+- 5 = Clear and professional
+- 3 = Adequate
+- 1 = Vague or incomplete
+
+---
+
+## 🧮 Overall Score Formula
+
+`Score = (A×0.35) + (B×0.2) + (C×0.25) + (D×0.1) + (E×0.1)`
+
+Where:
+- A = Strategic Alignment
+- B = Global Benchmarking
+- C = Value
+- D = Sensitivity
+- E = Clarity
+
+---
+
+## ✅ Example Scoring Format
+
+```json
+{
+  "dataset_title": "National PV System Performance",
+  "score": {
+    "strategic_alignment": 5,
+    "global_benchmarking": 4,
+    "value": 5,
+    "sensitivity": 4,
+    "clarity": 5,
+    "overall": 4.65
+  },
+  "comments": "Highly aligned with national goals and widely published globally. Publish with site-level masking."
+}
+```

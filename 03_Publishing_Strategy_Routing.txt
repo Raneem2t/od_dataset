@@ -1,0 +1,54 @@
+# 📄 03_Publishing_Strategy_Routing.txt
+
+## 🧭 Publishing Strategy Routing Logic
+
+This file defines how the system connects the entity’s strategic objectives to relevant publishing opportunities based on global open data patterns.
+
+---
+
+## 🧱 Core Routing Principle
+
+Each dataset recommendation must serve at least one of the 100 strategic objectives.
+
+---
+
+## 🧩 Routing Logic Components
+
+### 1. Keyword Matching
+- For each strategic objective, associate relevant keywords (e.g. "solar", "waste", "capacity building").
+- Match those keywords against dataset metadata (title, description, tags).
+- Use fuzzy match if necessary.
+
+### 2. Domain-to-Objective Mapping
+- Classify datasets by domain (e.g., R&D, Safety, Grid).
+- Map domains to strategy pillars (e.g., “Grid Data” → Pillar 5: Regulations).
+
+### 3. Reuse Signal Prioritization
+- Prefer datasets that have high reuse evidence globally and match multiple strategy objectives.
+
+---
+
+## 🔁 Routing Flow Example
+
+1. Objective: "Increase local solar component manufacturing"
+   - Keywords: "solar", "local content", "supply chain"
+   - Matching Dataset: "Inventory of Imported Solar Components"
+   - Result: Match confirmed, routed to recommendation engine.
+
+2. Objective: "Support radiation measurement innovation"
+   - Keywords: "GHI", "irradiance", "sensor"
+   - Matching Dataset: "Ground Station Solar Sensor Calibrations"
+   - Result: Match confirmed, included in publishing suggestions.
+
+---
+
+## 🧠 Override Conditions
+
+- If dataset metadata lacks keywords but description context matches objective → allow routing.
+- If dataset conflicts with legal or security considerations → do not route, even if strategic match exists.
+
+---
+
+## 🔒 Note
+
+Routing logic does not decide publishing—it only surfaces candidates aligned with strategy. Final decision depends on evaluation score.

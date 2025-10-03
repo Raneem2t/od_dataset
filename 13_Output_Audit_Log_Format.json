@@ -1,0 +1,23 @@
+{
+    "use_case_id": "string",
+    "input_id": "string",
+    "expert": "string",
+    "timestamp": "ISO8601 format",
+    "score": {
+        "strategic_alignment": 1,
+        "value": 1,
+        "clarity": 1,
+        "domain_relevance": 1,
+        "innovation": 1,
+        "overall": 0.0
+    },
+    "objectives_linked": [
+        {
+            "id": 4,
+            "description": "Innovate solar radiation measurement in desert environments"
+        }
+    ],
+    "value_summary": "Short paragraph explaining the perceived benefit",
+    "review_comments": "Any reviewer notes or feedback",
+    "final_decision": "accepted | needs_revision | rejected"
+}

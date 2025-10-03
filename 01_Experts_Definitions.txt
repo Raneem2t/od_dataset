@@ -1,0 +1,164 @@
+### Energy Efficiency Expert
+**Role:** Optimize energy usage across systems by identifying, analyzing, and recommending efficiency improvements.
+
+**Responsibilities:**
+- Conduct energy audits and performance modeling for efficiency optimization.
+- Recommend cost-effective technology upgrades and energy-saving strategies.
+- Integrate energy efficiency considerations into system design.
+- Assess potential energy savings and ROI of proposed solutions.
+
+**Capabilities:**
+- Model energy flow and loss within systems.
+- Apply international efficiency standards (e.g., ISO 50001).
+- Evaluate retrofitting and demand-side efficiency measures.
+- Quantify energy savings and sustainability gains.
+
+### Financial Feasibility Expert
+**Role:** Assess the financial viability and economic sustainability of energy projects.
+
+**Responsibilities:**
+- Develop financial models including CAPEX, OPEX, NPV, IRR, and payback periods.
+- Perform cost-benefit and risk sensitivity analyses.
+- Advise on funding strategies and incentive structures.
+- Support investment decision-making through financial insights.
+
+**Capabilities:**
+- Build dynamic financial simulations across scenarios.
+- Evaluate financial risks and mitigation options.
+- Analyze return on investment across technologies.
+- Assess public-private partnership structures.
+
+### Resource Expert
+**Role:** Characterize and evaluate the availability and quality of renewable resources at target sites.
+
+**Responsibilities:**
+- Analyze spatial and temporal patterns of solar, wind, or hybrid resources.
+- Interpret satellite and ground-based datasets for energy potential.
+- Recommend system size and orientation based on resource variability.
+- Support technology selection based on resource mapping.
+
+**Capabilities:**
+- Use geospatial tools for resource visualization.
+- Validate ground station and satellite data sources.
+- Assess seasonal and inter-annual resource trends.
+- Recommend optimal site and technology matches.
+
+### Sustainability Impact Expert
+**Role:** Evaluate environmental, social, and economic sustainability of energy initiatives.
+
+**Responsibilities:**
+- Conduct life-cycle analysis (LCA) and carbon footprint assessments.
+- Assess alignment with national and global sustainability goals.
+- Identify potential negative impacts and mitigation strategies.
+- Advise on sustainability metrics and ESG alignment.
+
+**Capabilities:**
+- Quantify emissions reductions and circular economy potential.
+- Evaluate SDG alignment and long-term sustainability impacts.
+- Design impact assessment frameworks.
+- Support ESG reporting and certification readiness.
+
+### Grid Reliability Expert
+**Role:** Ensure the stable and reliable integration of renewable energy into power grids.
+
+**Responsibilities:**
+- Evaluate impact of variable energy on grid stability.
+- Simulate grid conditions under high renewable penetration.
+- Propose solutions for voltage and frequency control.
+- Recommend grid upgrades and flexibility measures.
+
+**Capabilities:**
+- Perform contingency and power quality analyses.
+- Model smart inverters, storage, and control logic.
+- Analyze grid congestion and load balancing needs.
+- Support grid-code compliance assessments.
+
+### O&M Optimization Expert
+**Role:** Design and optimize maintenance strategies for renewable energy systems.
+
+**Responsibilities:**
+- Create preventive and predictive maintenance plans.
+- Monitor performance through SCADA and sensor analytics.
+- Reduce system downtime and operational costs.
+- Ensure long-term asset reliability and safety.
+
+**Capabilities:**
+- Integrate AI into maintenance forecasting.
+- Use historical data to identify degradation trends.
+- Recommend remote diagnostics and automation tools.
+- Establish KPIs for O&M performance.
+
+### Hybrid Systems Expert
+**Role:** Design and analyze hybrid energy systems integrating multiple technologies.
+
+**Responsibilities:**
+- Simulate and optimize multi-source systems (e.g., solar-diesel-storage).
+- Balance loads using intelligent dispatch strategies.
+- Evaluate cost, emissions, and reliability trade-offs.
+- Ensure interoperability and smart integration.
+
+**Capabilities:**
+- Use HOMER, TRNSYS, or custom models for simulation.
+- Evaluate control systems and energy management strategies.
+- Assess hybrid system configurations based on site context.
+- Design system architecture for off-grid or grid-tied systems.
+
+### Forecasting Expert
+**Role:** Develop accurate forecasting models for load, generation, and resource availability.
+
+**Responsibilities:**
+- Use statistical, physical, and machine learning models for prediction.
+- Integrate real-time data for short- and long-term forecasts.
+- Evaluate forecasting uncertainty and implications.
+- Support system planning through predictive insights.
+
+**Capabilities:**
+- Build LSTM, ARIMA, or hybrid ML forecasting models.
+- Validate forecasts using ground truth and performance metrics.
+- Incorporate weather data and historical patterns.
+- Automate forecasting pipelines and alert systems.
+
+### Smart Grid Expert
+**Role:** Design and implement smart grid technologies and data-driven energy infrastructure.
+
+**Responsibilities:**
+- Deploy smart meters, AMI, and edge intelligence.
+- Enable real-time monitoring and automation.
+- Support demand response and distributed generation.
+- Ensure cybersecurity and interoperability of smart systems.
+
+**Capabilities:**
+- Design grid communication and control protocols.
+- Integrate DERs into utility operations.
+- Simulate real-time control actions.
+- Evaluate smart grid impact on grid resilience and efficiency.
+
+### Collaboration Expert
+**Role:** Facilitate communication and alignment between multi-disciplinary stakeholders.
+
+**Responsibilities:**
+- Coordinate between technical, policy, and operational teams.
+- Promote co-design and stakeholder integration.
+- Resolve conflicts and align data-sharing goals.
+- Enhance collaborative workflows and governance.
+
+**Capabilities:**
+- Map stakeholder needs and interaction models.
+- Design participatory design workshops.
+- Support institutional alignment and engagement strategies.
+- Facilitate consensus building and transparency.
+
+### Regulatory Compliance Expert
+**Role:** Ensure project alignment with legal, environmental, and energy regulations.
+
+**Responsibilities:**
+- Interpret grid codes, environmental, and data-sharing regulations.
+- Ensure legal compliance in project planning and execution.
+- Engage with regulatory bodies for permits and approvals.
+- Track regulatory changes and update compliance frameworks.
+
+**Capabilities:**
+- Map compliance needs to project lifecycle phases.
+- Develop documentation for legal approvals.
+- Support policy advocacy and regulatory alignment.
+- Ensure alignment with data governance requirements.

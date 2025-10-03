@@ -1,0 +1,28 @@
+{
+    "input_id": "string",
+    "timestamp": "ISO8601 format",
+    "dataset_name": "string",
+    "keywords_extracted": [
+        "list",
+        "of",
+        "keywords"
+    ],
+    "matched_domain": "string",
+    "experts_routed_to": [
+        "Expert A",
+        "Expert B"
+    ],
+    "routing_reasoning": {
+        "keyword_matches": {
+            "Expert A": [
+                "keyword1",
+                "keyword2"
+            ],
+            "Expert B": [
+                "keyword3"
+            ]
+        },
+        "classification_match": "e.g., 'PV Performance / Efficiency'"
+    },
+    "notes": "Optional notes or flags (e.g., fallback routing, edge case, etc.)"
+}

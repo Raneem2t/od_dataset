@@ -1,0 +1,13 @@
+{
+    "dataset_name": "Urban Rooftop Solar Potential - Riyadh",
+    "description": "This dataset includes high-resolution irradiance maps, rooftop availability data, and estimated PV performance potential across urban neighborhoods in Riyadh.",
+    "keywords": [
+        "solar",
+        "PV",
+        "urban",
+        "Riyadh",
+        "irradiance",
+        "rooftop",
+        "mapping"
+    ]
+}

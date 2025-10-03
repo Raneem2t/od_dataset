@@ -1,0 +1,32 @@
+{
+    "input_id": "sample-001",
+    "strategy_focus_keywords": [
+        "solar",
+        "photovoltaic",
+        "irradiance",
+        "performance",
+        "efficiency",
+        "energy transition"
+    ],
+    "linked_objectives": [
+        4,
+        6,
+        36,
+        87
+    ],
+    "example_entity_scope": "National renewable energy development, PV system optimization, and solar performance benchmarking.",
+    "local_constraints": {
+        "sensitivity_flags": [
+            "No individual household identifiers",
+            "No GPS-level granularity below site level"
+        ],
+        "legal_exclusions": [
+            "No publishing of nuclear plant locations"
+        ]
+    },
+    "current_interest": [
+        "GHI datasets from national ground stations",
+        "DNI modeled surfaces over 5 years",
+        "PV system testbed performance results"
+    ]
+}

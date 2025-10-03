@@ -1,0 +1,72 @@
+# 📄 10_Router_Workflow_and_Logic.txt
+
+## 🔁 Router Workflow & Logic
+
+This file describes how the Insights Engine's Router functions to manage and direct input data to the most appropriate expert(s).
+
+---
+
+## 🔧 Router Responsibilities
+
+- Analyze incoming dataset metadata (name, description, keywords).
+- Match metadata against classification rules and keyword mappings.
+- Select the most relevant expert(s) to handle the use case generation.
+- Route input to 1–3 experts maximum to ensure focus and relevance.
+- Prevent redundant evaluations by inappropriate experts.
+
+---
+
+## ⚙️ Workflow Steps
+
+### Step 1: Metadata Preprocessing
+- Normalize text (lowercase, strip symbols).
+- Translate non-English keywords if needed.
+- Remove duplicates and general terms.
+
+### Step 2: Keyword Matching
+- Match keywords against `06_Domain_Keyword_Mapping.json`.
+- Score keyword-expert associations based on frequency and relevance.
+- Apply weight to contextual clues in description if keywords are ambiguous.
+
+### Step 3: Classification Rule Application
+- Use `07_Dataset_Classification_Rules.txt` to assign a domain label.
+- Use this domain label to prioritize specific expert roles.
+
+### Step 4: Expert Ranking & Selection
+- Combine scores from keyword and classification steps.
+- Select the top-ranked experts (usually 1 or 2; max 3).
+- Ensure diversity (e.g., don’t select 3 similar experts if others add value).
+
+### Step 5: Routing Decision
+- Route to selected experts only.
+- Log routing decisions for traceability.
+
+---
+
+## 🤖 Example Routing Logic
+
+Input:
+- Dataset: “Wind Speed Observations – Red Sea Offshore”
+- Keywords: [“wind”, “offshore”, “turbine”, “forecast”]
+- Description includes “high-resolution wind resource assessment for offshore planning.”
+
+Routing Result:
+- Experts:
+  - Resource Expert
+  - Forecasting Expert
+
+---
+
+## 🧩 Edge Case Handling
+
+- If no strong match found → Default route to Collaboration Expert.
+- If conflict between rules and keywords → Favor rule-based domain.
+- If expert capacity is full (in live model) → Queue input or reroute with delay.
+
+---
+
+## 📌 Notes
+
+- The router operates independently of expert content logic.
+- Router decisions are explainable and auditable.
+- Future versions may incorporate LLM-based routing for contextual nuance.

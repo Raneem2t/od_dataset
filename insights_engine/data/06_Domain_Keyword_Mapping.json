@@ -1,0 +1,44 @@
+{
+  "energy": [
+    "renewable",
+    "solar",
+    "wind",
+    "efficiency",
+    "grid",
+    "power"
+  ],
+  "transportation": [
+    "traffic",
+    "mobility",
+    "vehicle",
+    "transit",
+    "logistics"
+  ],
+  "healthcare": [
+    "medical",
+    "health",
+    "hospital",
+    "patient",
+    "treatment"
+  ],
+  "education": [
+    "school",
+    "university",
+    "student",
+    "learning",
+    "academic"
+  ],
+  "environment": [
+    "climate",
+    "pollution",
+    "conservation",
+    "sustainability"
+  ],
+  "economic": [
+    "economy",
+    "finance",
+    "trade",
+    "business",
+    "investment"
+  ]
+}

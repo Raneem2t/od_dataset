@@ -1,0 +1,23 @@
+{
+  "timestamp": "ISO datetime",
+  "dataset_name": "string",
+  "routing_decisions": [
+    {
+      "expert_name": "string",
+      "expert_domain": "string",
+      "can_handle": "boolean",
+      "alignment_score": "float",
+      "decision_timestamp": "ISO datetime"
+    }
+  ],
+  "selected_experts": [
+    {
+      "name": "string",
+      "domain": "string",
+      "capabilities": [
+        "array of strings"
+      ]
+    }
+  ],
+  "routing_strategy": "string"
+}

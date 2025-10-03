@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Use Cases - Insights Engine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="nav-bar">
+                <a href="index.html" class="back-btn">← Back to Home</a>
+                <h1 class="page-title">🧠 Generate Use Cases</h1>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Dataset Metadata Input</h2>
+                    <p>Provide dataset information to generate strategic use cases aligned with national objectives</p>
+                </div>
+                
+                <form id="usecaseForm" class="dataset-form">
+                    <div class="form-group">
+                        <label for="datasetName">Dataset Name *</label>
+                        <input type="text" id="datasetName" name="datasetName" required 
+                               placeholder="e.g., Renewable Energy Production Statistics">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="datasetDescription">Dataset Description *</label>
+                        <textarea id="datasetDescription" name="datasetDescription" required rows="6"
+                                placeholder="Describe the dataset content, scope, time period, and data sources..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="keywords">Keywords</label>
+                        <input type="text" id="keywords" name="keywords" 
+                               placeholder="renewable energy, solar, wind, sustainability (comma-separated)">
+                        <small class="form-hint">Separate keywords with commas</small>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <span class="btn-icon">⚡</span>
+                            Generate Use Cases
+                        </button>
+                        <button type="reset" class="btn btn-outline">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div id="loadingSection" class="loading-section" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Analyzing dataset and routing to domain experts...</p>
+            </div>
+            
+            <div id="resultsSection" class="results-section" style="display: none;">
+                <div class="results-header">
+                    <h3>Generated Use Cases</h3>
+                    <div class="expert-routing">
+                        <span class="routing-label">Routed to experts:</span>
+                        <div id="routedExperts" class="expert-tags"></div>
+                    </div>
+                </div>
+                
+                <div id="usecaseResults" class="usecase-results">
+                    <!-- Results will be populated here -->
+                </div>
+                
+                <div class="results-actions">
+                    <button class="btn btn-outline" onclick="exportResults()">📄 Export Results</button>
+                    <button class="btn btn-outline" onclick="generateNew()">🔄 Generate New</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        document.getElementById('usecaseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            generateUseCases();
+        });
+        
+        function generateUseCases() {
+            const formData = {
+                name: document.getElementById('datasetName').value,
+                description: document.getElementById('datasetDescription').value,
+                keywords: document.getElementById('keywords').value.split(',').map(k => k.trim()).filter(k => k)
+            };
+            
+            // Show loading
+            document.querySelector('.form-container').style.display = 'none';
+            document.getElementById('loadingSection').style.display = 'block';
+            
+            // Simulate API call
+            setTimeout(() => {
+                showMockResults(formData);
+            }, 3000);
+        }
+        
+        // Global variables to store current data
+        let currentFormData = {};
+        let currentResults = [];
+        let generationCount = 0;
+        
+        function showMockResults(formData) {
+            currentFormData = formData;
+            generationCount++;
+            
+            document.getElementById('loadingSection').style.display = 'none';
+            document.getElementById('resultsSection').style.display = 'block';
+            
+            // Dynamic expert routing based on keywords
+            const experts = routeToExperts(formData);
+            const expertTags = experts.map(expert => `<span class="expert-tag">${expert}</span>`).join('');
+            document.getElementById('routedExperts').innerHTML = expertTags;
+            
+            // Generate diverse use cases
+            const useCases = generateDiverseUseCases(formData, experts);
+            currentResults = useCases;
+            
+            renderUseCases(useCases);
+        }
+        
+        function routeToExperts(formData) {
+            const text = `${formData.name} ${formData.description} ${formData.keywords.join(' ')}`.toLowerCase();
+            const experts = [];
+            
+            // Expert routing logic
+            if (text.includes('energy') || text.includes('renewable') || text.includes('solar') || text.includes('wind')) {
+                experts.push('Energy Efficiency Expert');
+            }
+            if (text.includes('transport') || text.includes('traffic') || text.includes('mobility') || text.includes('logistics')) {
+                experts.push('Transportation Expert');
+            }
+            if (text.includes('health') || text.includes('medical') || text.includes('hospital') || text.includes('patient')) {
+                experts.push('Healthcare Expert');
+            }
+            if (text.includes('education') || text.includes('school') || text.includes('university') || text.includes('student')) {
+                experts.push('Education Expert');
+            }
+            if (text.includes('environment') || text.includes('climate') || text.includes('pollution') || text.includes('green')) {
+                experts.push('Environmental Expert');
+            }
+            if (text.includes('finance') || text.includes('economic') || text.includes('investment') || text.includes('budget')) {
+                experts.push('Economic Expert');
+            }
+            if (text.includes('digital') || text.includes('technology') || text.includes('ai') || text.includes('smart')) {
+                experts.push('Digital Transformation Expert');
+            }
+            if (text.includes('social') || text.includes('community') || text.includes('welfare') || text.includes('development')) {
+                experts.push('Social Development Expert');
+            }
+            
+            return experts.length > 0 ? experts : ['Strategic Planning Expert'];
+        }
+        
+        function generateDiverseUseCases(formData, experts) {
+            const datasetName = formData.name;
+            const description = formData.description;
+            const keywords = formData.keywords;
+            
+            const useCaseTemplates = [
+                {
+                    scope: 'technical',
+                    title: `🔧 Technical Infrastructure Optimization`,
+                    objective: `Leverage ${datasetName} to optimize technical infrastructure and system performance`,
+                    implementation: `Deploy advanced analytics on ${datasetName} to identify technical bottlenecks, predict system failures, and optimize resource allocation across infrastructure networks.`,
+                    tags: ['Infrastructure', 'Optimization', 'Predictive Analytics']
+                },
+                {
+                    scope: 'financial',
+                    title: `💰 Economic Impact & ROI Analysis`,
+                    objective: `Quantify economic value and return on investment using ${datasetName}`,
+                    implementation: `Develop comprehensive economic models using ${datasetName} to measure cost-benefit ratios, calculate ROI for government initiatives, and optimize budget allocation.`,
+                    tags: ['Economics', 'ROI', 'Budget Optimization']
+                },
+                {
+                    scope: 'operational',
+                    title: `⚡ Operational Excellence Initiative`,
+                    objective: `Enhance operational efficiency and service delivery through ${datasetName}`,
+                    implementation: `Implement operational dashboards and KPI tracking using ${datasetName} to streamline processes, reduce waste, and improve service quality metrics.`,
+                    tags: ['Operations', 'Efficiency', 'Service Quality']
+                },
+                {
+                    scope: 'regulatory',
+                    title: `📋 Regulatory Compliance & Policy Framework`,
+                    objective: `Ensure regulatory compliance and inform policy development with ${datasetName}`,
+                    implementation: `Create automated compliance monitoring systems using ${datasetName} to track regulatory adherence, identify policy gaps, and support evidence-based policymaking.`,
+                    tags: ['Compliance', 'Policy', 'Governance']
+                },
+                {
+                    scope: 'forecasting',
+                    title: `🔮 Predictive Analytics & Forecasting`,
+                    objective: `Develop predictive capabilities and strategic forecasting using ${datasetName}`,
+                    implementation: `Build machine learning models on ${datasetName} to predict future trends, identify emerging patterns, and enable proactive decision-making.`,
+                    tags: ['Forecasting', 'ML', 'Strategic Planning']
+                },
+                {
+                    scope: 'innovation',
+                    title: `🚀 Innovation Ecosystem Development`,
+                    objective: `Foster innovation and entrepreneurship through open access to ${datasetName}`,
+                    implementation: `Establish innovation labs and startup incubators leveraging ${datasetName} to drive technological advancement and create new business opportunities.`,
+                    tags: ['Innovation', 'Startups', 'Technology']
+                },
+                {
+                    scope: 'transparency',
+                    title: `🌐 Government Transparency & Accountability`,
+                    objective: `Enhance government transparency and public accountability with ${datasetName}`,
+                    implementation: `Develop public dashboards and citizen engagement platforms using ${datasetName} to increase transparency, build public trust, and enable data-driven citizen participation.`,
+                    tags: ['Transparency', 'Accountability', 'Citizen Engagement']
+                },
+                {
+                    scope: 'research',
+                    title: `🔬 Academic Research & Scientific Advancement`,
+                    objective: `Advance scientific research and academic collaboration through ${datasetName}`,
+                    implementation: `Establish research partnerships with universities and institutes using ${datasetName} to drive scientific breakthroughs and support evidence-based research.`,
+                    tags: ['Research', 'Academia', 'Science']
+                },
+                {
+                    scope: 'international',
+                    title: `🌍 International Cooperation & Benchmarking`,
+                    objective: `Enable international cooperation and global benchmarking with ${datasetName}`,
+                    implementation: `Share ${datasetName} through international platforms to enable global benchmarking, foster international cooperation, and position the country as a data leader.`,
+                    tags: ['International', 'Benchmarking', 'Cooperation']
+                },
+                {
+                    scope: 'security',
+                    title: `🔒 Security & Risk Management`,
+                    objective: `Enhance security posture and risk management using ${datasetName}`,
+                    implementation: `Implement security analytics and risk assessment frameworks using ${datasetName} to identify vulnerabilities, predict security threats, and strengthen national security.`,
+                    tags: ['Security', 'Risk Management', 'Analytics']
+                },
+                {
+                    scope: 'sustainability',
+                    title: `🌱 Sustainability & Environmental Impact`,
+                    objective: `Drive sustainability initiatives and environmental protection through ${datasetName}`,
+                    implementation: `Develop environmental monitoring and sustainability tracking systems using ${datasetName} to measure environmental impact and drive green initiatives.`,
+                    tags: ['Sustainability', 'Environment', 'Green Initiative']
+                },
+                {
+                    scope: 'citizen_services',
+                    title: `👥 Citizen Services Enhancement`,
+                    objective: `Improve citizen services and quality of life using ${datasetName}`,
+                    implementation: `Deploy citizen-centric service platforms using ${datasetName} to personalize government services, reduce wait times, and enhance citizen satisfaction.`,
+                    tags: ['Citizen Services', 'Quality of Life', 'Personalization']
+                }
+            ];
+            
+            // Select and customize use cases based on context
+            const selectedCases = useCaseTemplates.slice(0, 10).map((template, index) => {
+                return {
+                    ...template,
+                    id: `use_case_${generationCount}_${index + 1}`,
+                    expert: experts[index % experts.length],
+                    priority: ['high', 'medium', 'low'][index % 3],
+                    strategic_alignment: `Vision 2030 - ${['Economic Diversification', 'Quality of Life', 'Ambitious Nation'][index % 3]}`,
+                    timeline: ['6-12 months', '12-18 months', '18-24 months'][index % 3],
+                    resources: generateResourceEstimate(template.scope)
+                };
+            });
+            
+            return selectedCases;
+        }
+        
+        function generateResourceEstimate(scope) {
+            const estimates = {
+                'technical': ['Technical team (5-8 FTE)', 'Infrastructure budget: $500K-1M', 'Cloud computing resources'],
+                'financial': ['Financial analysts (3-5 FTE)', 'Economic modeling tools', 'Budget: $200K-500K'],
+                'operational': ['Operations team (4-6 FTE)', 'Process automation tools', 'Training budget: $100K-300K'],
+                'regulatory': ['Legal/Policy team (2-4 FTE)', 'Compliance software', 'Consultation budget: $150K-400K'],
+                'forecasting': ['Data science team (3-5 FTE)', 'ML infrastructure', 'Analytics budget: $300K-700K'],
+                'innovation': ['Innovation team (4-6 FTE)', 'Incubator space', 'Startup funding: $1M-5M'],
+                'transparency': ['Communications team (2-4 FTE)', 'Public platform development', 'Budget: $200K-600K'],
+                'research': ['Research partnerships', 'Academic collaborations', 'Research grants: $500K-2M'],
+                'international': ['International relations team', 'Global platform access', 'Budget: $300K-800K'],
+                'security': ['Security team (3-5 FTE)', 'Security tools and monitoring', 'Budget: $400K-1M'],
+                'sustainability': ['Environmental team (2-4 FTE)', 'Monitoring equipment', 'Budget: $250K-700K'],
+                'citizen_services': ['Service design team (3-5 FTE)', 'Citizen platform development', 'Budget: $400K-1.2M']
+            };
+            return estimates[scope] || ['Strategic team (2-3 FTE)', 'Standard tools and resources', 'Budget: $200K-500K'];
+        }
+        
+        function renderUseCases(useCases) {
+            const resultsHtml = useCases.map(useCase => `
+                <div class="usecase-item" data-id="${useCase.id}">
+                    <div class="usecase-header">
+                        <h4>${useCase.title}</h4>
+                        <div class="usecase-meta">
+                            <span class="priority-badge ${useCase.priority}">${useCase.priority.toUpperCase()}</span>
+                            <span class="scope-badge">${useCase.scope.toUpperCase()}</span>
+                        </div>
+                    </div>
+                    <p><strong>Objective:</strong> ${useCase.objective}</p>
+                    <p><strong>Implementation:</strong> ${useCase.implementation}</p>
+                    <p><strong>Expert:</strong> <span class="expert-name">${useCase.expert}</span></p>
+                    <p><strong>Strategic Alignment:</strong> ${useCase.strategic_alignment}</p>
+                    <p><strong>Timeline:</strong> ${useCase.timeline}</p>
+                    <div class="resources-section">
+                        <strong>Resources Required:</strong>
+                        <ul class="resources-list">
+                            ${useCase.resources.map(resource => `<li>${resource}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="usecase-tags">
+                        ${useCase.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                    <div class="usecase-actions">
+                        <button class="btn btn-outline btn-small" onclick="viewUseCaseDetails('${useCase.id}')">📋 View Details</button>
+                        <button class="btn btn-outline btn-small" onclick="duplicateUseCase('${useCase.id}')">📋 Duplicate</button>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('usecaseResults').innerHTML = resultsHtml;
+        }
+        
+        function exportResults() {
+            const exportModal = document.getElementById('exportModal') || createExportModal();
+            exportModal.style.display = 'block';
+        }
+        
+        function createExportModal() {
+            const modal = document.createElement('div');
+            modal.id = 'exportModal';
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>📄 Export Use Cases</h3>
+                        <button class="close-btn" onclick="closeModal('exportModal')">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Select export format:</p>
+                        <div class="export-options">
+                            <button class="btn btn-primary" onclick="exportToJSON()">📋 Export as JSON</button>
+                            <button class="btn btn-secondary" onclick="exportToPDF()">📄 Export as PDF</button>
+                            <button class="btn btn-outline" onclick="exportToCSV()">📊 Export as CSV</button>
+                        </div>
+                        <div class="export-options">
+                            <label><input type="checkbox" id="includeDetails" checked> Include detailed implementation</label><br>
+                            <label><input type="checkbox" id="includeResources" checked> Include resource estimates</label><br>
+                            <label><input type="checkbox" id="includeTimeline" checked> Include timeline information</label>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            return modal;
+        }
+        
+        function exportToJSON() {
+            const includeDetails = document.getElementById('includeDetails').checked;
+            const includeResources = document.getElementById('includeResources').checked;
+            const includeTimeline = document.getElementById('includeTimeline').checked;
+            
+            const exportData = {
+                dataset: currentFormData,
+                generation_timestamp: new Date().toISOString(),
+                generation_count: generationCount,
+                use_cases: currentResults.map(useCase => {
+                    const exported = {
+                        id: useCase.id,
+                        title: useCase.title,
+                        scope: useCase.scope,
+                        objective: useCase.objective,
+                        expert: useCase.expert,
+                        priority: useCase.priority,
+                        tags: useCase.tags
+                    };
+                    
+                    if (includeDetails) exported.implementation = useCase.implementation;
+                    if (includeResources) exported.resources = useCase.resources;
+                    if (includeTimeline) {
+                        exported.timeline = useCase.timeline;
+                        exported.strategic_alignment = useCase.strategic_alignment;
+                    }
+                    
+                    return exported;
+                })
+            };
+            
+            downloadFile(JSON.stringify(exportData, null, 2), `use_cases_${Date.now()}.json`, 'application/json');
+            closeModal('exportModal');
+        }
+        
+        function exportToPDF() {
+            // Simulate PDF export
+            const pdfContent = generatePDFContent();
+            downloadFile(pdfContent, `use_cases_report_${Date.now()}.txt`, 'text/plain');
+            closeModal('exportModal');
+        }
+        
+        function exportToCSV() {
+            const headers = ['ID', 'Title', 'Scope', 'Objective', 'Expert', 'Priority', 'Timeline', 'Tags'];
+            const rows = currentResults.map(useCase => [
+                useCase.id,
+                useCase.title.replace(/[📊🔧💰⚡📋🚀🌐🔬🌍🔒🌱👥]/g, '').trim(),
+                useCase.scope,
+                useCase.objective,
+                useCase.expert,
+                useCase.priority,
+                useCase.timeline,
+                useCase.tags.join('; ')
+            ]);
+            
+            const csvContent = [headers, ...rows].map(row => 
+                row.map(cell => `"${cell.toString().replace(/"/g, '""')}"`).join(',')
+            ).join('\n');
+            
+            downloadFile(csvContent, `use_cases_${Date.now()}.csv`, 'text/csv');
+            closeModal('exportModal');
+        }
+        
+        function generatePDFContent() {
+            return `USE CASES REPORT\n==================\n\nDataset: ${currentFormData.name}\nGenerated: ${new Date().toLocaleString()}\n\n${currentResults.map((useCase, index) => 
+                `${index + 1}. ${useCase.title}\n   Scope: ${useCase.scope}\n   Expert: ${useCase.expert}\n   Priority: ${useCase.priority}\n   Objective: ${useCase.objective}\n   Implementation: ${useCase.implementation}\n\n`
+            ).join('')}`;
+        }
+        
+        function downloadFile(content, filename, contentType) {
+            const blob = new Blob([content], { type: contentType });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+        
+        function generateNew() {
+            if (currentFormData.name) {
+                // Show loading again
+                document.getElementById('resultsSection').style.display = 'none';
+                document.getElementById('loadingSection').style.display = 'block';
+                
+                // Generate new results after a short delay
+                setTimeout(() => {
+                    showMockResults(currentFormData);
+                }, 2000);
+            } else {
+                // Reset form if no previous data
+                document.getElementById('resultsSection').style.display = 'none';
+                document.querySelector('.form-container').style.display = 'block';
+                document.getElementById('usecaseForm').reset();
+            }
+        }
+        
+        function viewUseCaseDetails(useCaseId) {
+            const useCase = currentResults.find(uc => uc.id === useCaseId);
+            if (!useCase) return;
+            
+            const detailModal = createDetailModal(useCase);
+            document.body.appendChild(detailModal);
+            detailModal.style.display = 'block';
+        }
+        
+        function createDetailModal(useCase) {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content large">
+                    <div class="modal-header">
+                        <h3>${useCase.title}</h3>
+                        <button class="close-btn" onclick="this.closest('.modal').remove()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="detail-grid">
+                            <div class="detail-section">
+                                <h4>📋 Overview</h4>
+                                <p><strong>Scope:</strong> ${useCase.scope}</p>
+                                <p><strong>Priority:</strong> ${useCase.priority}</p>
+                                <p><strong>Expert:</strong> ${useCase.expert}</p>
+                                <p><strong>Timeline:</strong> ${useCase.timeline}</p>
+                            </div>
+                            <div class="detail-section">
+                                <h4>🎯 Objective</h4>
+                                <p>${useCase.objective}</p>
+                            </div>
+                            <div class="detail-section">
+                                <h4>⚡ Implementation</h4>
+                                <p>${useCase.implementation}</p>
+                            </div>
+                            <div class="detail-section">
+                                <h4>🏛️ Strategic Alignment</h4>
+                                <p>${useCase.strategic_alignment}</p>
+                            </div>
+                            <div class="detail-section">
+                                <h4>💼 Resources Required</h4>
+                                <ul>${useCase.resources.map(resource => `<li>${resource}</li>`).join('')}</ul>
+                            </div>
+                            <div class="detail-section">
+                                <h4>🏷️ Tags</h4>
+                                <div class="usecase-tags">
+                                    ${useCase.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            return modal;
+        }
+        
+        function duplicateUseCase(useCaseId) {
+            const useCase = currentResults.find(uc => uc.id === useCaseId);
+            if (!useCase) return;
+            
+            const duplicated = {
+                ...useCase,
+                id: `use_case_${generationCount}_duplicate_${Date.now()}`,
+                title: useCase.title + ' (Copy)'
+            };
+            
+            currentResults.push(duplicated);
+            renderUseCases(currentResults);
+        }
+        
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) modal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
